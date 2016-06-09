@@ -3,7 +3,7 @@
 
         public function indexAction() {
 
-            exit('Ya volvemos');
+            exit('Ya volvimos');
 
         }
     }
