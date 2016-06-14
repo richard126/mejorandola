@@ -5,8 +5,8 @@
         <title><?= $titulo ?></title>
     </head>
     <body>
-    <h1>Mejorando.la</h1>
-    Aprendiendo <strong><?= $language ?></strong>
+    <h1><?= $titulo ?></h1>
+
     <p><a href="contactos.php">Contáctanos</a></p>
     </body>
 </html>

@@ -95,7 +95,12 @@
             require $controllerFileName;
 
             $controller = new $controllerClassName();
-            call_user_func_array( [ $controller,$actionMethodName], $params  );
+            $response =call_user_func_array( [ $controller,$actionMethodName], $params  );
 
+            if( $response instanceof Response ) {
+                $response->execute();
+            }else{
+                exit('Respuesta no valida');
+            }
         }
     }

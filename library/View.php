@@ -12,11 +12,34 @@
 
         }
 
+        /**
+         * @return mixed
+         */
+        public function getTemplate()
+        {
+            return $this->template;
+        }
+
+        /**
+         * @return array
+         */
+        public function getVars()
+        {
+            return $this->vars;
+        }
+
+
+
         public function execute()
         {
-            extract( $vars );
+            $template = $this->getTemplate();
+            $vars = $this->getVars();
 
-            require "views/$template.tpl.php";
+            call_user_func( function() use ( $template, $vars ) {
+                extract( $vars );
+                require "views/$template.tpl.php";
+            } );
+
         }
 
     }
