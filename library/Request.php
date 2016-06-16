@@ -81,6 +81,9 @@
             return $this->params;
         }
 
+        /**
+         *
+         */
         public function execute() {
 
             $controllerClassName = $this->getControllerClassName();
@@ -97,10 +100,32 @@
             $controller = new $controllerClassName();
             $response =call_user_func_array( [ $controller,$actionMethodName], $params  );
 
+            $this->executeResponse( $response );
+
+        }
+
+        public function executeResponse( $response ) {
+
             if( $response instanceof Response ) {
+
                 $response->execute();
-            }else{
-                exit('Respuesta no valida');
+
             }
+            elseif ( is_string($response) ){
+
+                echo $response;
+
+            }
+            elseif ( is_array($response) ){
+
+                echo json_encode($response);
+
+            }
+            else{
+
+                exit('Respuesta no valida');
+
+            }
+
         }
     }
