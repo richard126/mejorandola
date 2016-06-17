@@ -22,6 +22,7 @@
             $this->resolveController( $segments );
             $this->resolveAction( $segments );
             $this->resolveParams( $segments );
+
         }
 
         public function resolveController( &$segments ) {
@@ -98,6 +99,7 @@
             require $controllerFileName;
 
             $controller = new $controllerClassName();
+
             $response =call_user_func_array( [ $controller,$actionMethodName], $params  );
 
             $this->executeResponse( $response );
@@ -110,22 +112,25 @@
 
                 $response->execute();
 
+            } else {
+
+                if (is_string($response) ) {
+
+                    echo $response;
+
+                } else {
+
+                    if (is_array($response) ) {
+
+                        echo json_encode($response);
+
+                    } else {
+
+                        if( !$response == '')
+                        exit('Respuesta no valida');
+
+                    }
+                }
             }
-            elseif ( is_string($response) ){
-
-                echo $response;
-
-            }
-            elseif ( is_array($response) ){
-
-                echo json_encode($response);
-
-            }
-            else{
-
-                exit('Respuesta no valida');
-
-            }
-
         }
     }

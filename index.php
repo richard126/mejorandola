@@ -22,7 +22,7 @@
          $url = $_GET['url'];
 
      }
-    
-    $request = new Request( $url );
+
+   $request = new Request( $url );
 
     $request->execute();

@@ -3,6 +3,6 @@
 
         public function indexAction() {
 
-            return $view = new View('home',['titulo'=>'MejorandolaPHP']);
+            return new View('home',['titulo'=>'Clase 2']);
         }
     }

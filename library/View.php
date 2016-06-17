@@ -28,6 +28,10 @@
             return $this->vars;
         }
 
+        public function getTemplateFileName($template) {
+            return "views/$template.tpl.php";
+        }
+
 
 
         public function execute()
@@ -36,10 +40,24 @@
             $vars = $this->getVars();
 
             call_user_func( function() use ( $template, $vars ) {
-                extract( $vars );
-                require "views/$template.tpl.php";
+
+                $this->executeTmp( $template, $vars );
+
             } );
 
+        }
+
+        public function executeTmp( $template, $vars ) {
+
+            extract( $vars );
+
+            ob_start();
+            //cambiar tipo de formao para enviar las siguientes templates
+            require $this->getTemplateFileName($template);
+
+            $tpl_content = ob_get_clean();
+
+            require "views/layout.tpl.php";
         }
 
     }
